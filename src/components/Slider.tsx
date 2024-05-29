@@ -38,7 +38,7 @@ const Slider = () => {
       />
 
       <div
-        className="flex overflow-x-auto w-full px-16 py-4 scrollbar-none scroll-smooth"
+        className="flex overflow-x-auto w-full px-5 md:px-16 py-4 scrollbar-none scroll-smooth"
         ref={elementRef}
       >
         {movielist.map((movie: MovieTypes) => {
@@ -47,7 +47,7 @@ const Slider = () => {
               key={movie.id}
               src={image_Base_URL + movie.backdrop_path}
               alt=""
-              className="min-w-full md:h-[350px] object-cover object-top mr-5 rounded-md hover:border-[4px] border-gray-400 transition-all 
+              className="min-w-full md:h-[350px] object-cover object-top mr-3 md:mr-5 rounded-md hover:border-[4px] border-gray-400 transition-all 
               duration-100 ease-in"
             />
           );
