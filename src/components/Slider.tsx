@@ -3,13 +3,16 @@ type MovieTypes = {
   backdrop_path: string;
 };
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 import { getTrendingVideos } from "../services/apiRequest";
 const image_Base_URL = "https://image.tmdb.org/t/p/original";
 
+const screenWidth = window.innerWidth;
+
 const Slider = () => {
   const [movielist, setMovielist] = useState([]);
+  const elementRef = useRef(null);
 
   useEffect(() => {
     getTrendingVideos().then((res) => {
@@ -18,19 +21,37 @@ const Slider = () => {
     });
   }, []);
 
+  const scrollLeft = (element: HTMLDivElement) => {
+    element.scrollLeft -= screenWidth - 110;
+  };
+
+  const scrollRight = (element: HTMLDivElement) => {
+    element.scrollLeft += screenWidth - 110;
+  };
+
   return (
     <div>
-      <HiChevronLeft className="hidden md:block absolute mx-3 mt-[150px] text-white text-5xl cursor-pointer" />
-      <HiChevronRight className="hidden md:block absolute right-0 mx-3 mt-[150px] text-white text-5xl cursor-pointer" />
+      <HiChevronLeft
+        className="hidden md:block absolute mx-3 mt-[150px] text-white text-5xl cursor-pointer"
+        onClick={() => scrollLeft(elementRef.current!)}
+      />
+      <HiChevronRight
+        className="hidden md:block absolute right-0 mx-3 mt-[150px] text-white text-5xl cursor-pointer"
+        onClick={() => scrollRight(elementRef.current!)}
+      />
 
-      <div className="flex overflow-x-auto w-full px-16 py-4 scrollbar-none">
+      <div
+        className="flex overflow-x-auto w-full px-16 py-4 scrollbar-none scroll-smooth"
+        ref={elementRef}
+      >
         {movielist.map((movie: MovieTypes) => {
           return (
             <img
               key={movie.id}
               src={image_Base_URL + movie.backdrop_path}
               alt=""
-              className="min-w-full md:h-[350px] object-cover object-left-top mr-5 rounded-md"
+              className="min-w-full md:h-[350px] object-cover object-top mr-5 rounded-md hover:border-[4px] border-gray-400 transition-all 
+              duration-100 ease-in"
             />
           );
         })}
