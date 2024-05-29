@@ -15,10 +15,7 @@ const Slider = () => {
   const elementRef = useRef(null);
 
   useEffect(() => {
-    getTrendingVideos().then((res) => {
-      console.log(res.data.results);
-      setMovielist(res.data.results);
-    });
+    getTrendingVideos().then((res) => setMovielist(res.data.results));
   }, []);
 
   const scrollLeft = (element: HTMLDivElement) => {

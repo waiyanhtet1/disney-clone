@@ -44,8 +44,8 @@ const Header = () => {
         />
 
         <div className="hidden lg:flex gap-8 items-center">
-          {menu.map((item) => (
-            <HeaderItem name={item.name} Icon={item.icon} />
+          {menu.map((item, index) => (
+            <HeaderItem key={index} name={item.name} Icon={item.icon} />
           ))}
         </div>
 
@@ -53,7 +53,7 @@ const Header = () => {
         <div className="flex lg:hidden gap-5 items-center">
           {menu.map(
             (item, index) =>
-              index < 3 && <HeaderItem name={""} Icon={item.icon} />
+              index < 3 && <HeaderItem key={index} name={""} Icon={item.icon} />
           )}
           <div
             className="lg:hidden cursor-pointer relative"
@@ -65,7 +65,11 @@ const Header = () => {
                 {menu.map(
                   (item, index) =>
                     index > 2 && (
-                      <HeaderItem name={item.name} Icon={item.icon} />
+                      <HeaderItem
+                        key={index}
+                        name={item.name}
+                        Icon={item.icon}
+                      />
                     )
                 )}
               </div>
