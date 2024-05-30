@@ -5,8 +5,8 @@ type MovieTypes = {
 
 import { useEffect, useRef, useState } from "react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
+import { image_Base_URL } from "../constant/MovieImageURL";
 import { getTrendingVideos } from "../services/apiRequest";
-const image_Base_URL = "https://image.tmdb.org/t/p/original";
 
 const screenWidth = window.innerWidth;
 
